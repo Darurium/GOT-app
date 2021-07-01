@@ -8,10 +8,12 @@ class GotService {
 
         return await res.json();
     }
+
+    getAllCharacters() {
+        return this.getResource("https://www.anapioficeandfire.com/api/characters?page=10");
+    }
 }
 
+const char = new GotService();
+console.log(char.getAllCharacters);
 
-
-getResource('https://jsonplaceholder.typicode.com/posts/1000')
-    .then((res) => console.log("Success", res))
-    .catch((error) => console.error("Error", error));
