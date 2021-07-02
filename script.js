@@ -10,10 +10,22 @@ class GotService {
     }
 
     getAllCharacters() {
-        return this.getResource("https://www.anapioficeandfire.com/api/characters?page=10");
+        return this.getResource("https://www.anapioficeandfire.com/api/characters?page=5");
+    }
+
+    getCharacter(id) {
+        return this.getResource(`https://www.anapioficeandfire.com/api/characters/${id}`)
     }
 }
 
-const char = new GotService();
-console.log(char.getAllCharacters);
+const got = new GotService();
 
+got.getAllCharacters()
+    .then((res) => {
+        res.forEach(item => {
+            console.log(item.name)
+        })
+    });
+
+got.getCharacter(130)
+    .then(res => console.log(res));
