@@ -14,7 +14,7 @@ export default class GotService {
     }
 
     async getAllCharacters() {
-        const res = await this.getResource("/characters?page=5");
+        const res = await this.getResource("/characters?page=5&pageSize=10");
         return res.map(this._transformChar);
     }
 
@@ -39,7 +39,7 @@ export default class GotService {
         return this.getResource(`//houses/${id}`)
     }
 
-    _isData(data) {
+    _isData = (data) => {
         if (data) {
             return data
         } else {
@@ -47,7 +47,7 @@ export default class GotService {
         }
     }
 
-    _transformChar(char) {
+    _transformChar = (char) => {
         return {
             name: this._isData(char.name),
             gender: this._isData(char.gender),
@@ -57,7 +57,7 @@ export default class GotService {
         }
     }
 
-    _transformHouse(house) {
+    _transformHouse = (house) => {
         return {
             name: this._isData(house.name),
             region: this._isData(house.region),
@@ -68,7 +68,7 @@ export default class GotService {
         }
     }
 
-    _transformBook(book) {
+    _transformBook = (book) => {
         return {
             name: this._isData(book.name),
             numberOfPages: this._isData(book.numberOfPages),

@@ -9,12 +9,19 @@ import CharDetails from '../charDetails';
 export default class App extends Component {
 
     state = {
-        charView: true
+        charView: true,
+        selectedChar: 130
     }
 
     onToggleChar = () => {
         this.setState({
             charView: !this.state.charView
+        })
+    }
+
+    onCharSelected = (id) => {
+        this.setState({
+            selectedChar: id
         })
     }
 
@@ -42,10 +49,10 @@ export default class App extends Component {
                     </Row>
                     <Row>
                         <Col md='6'>
-                            <ItemList />
+                            <ItemList onCharSelected={this.onCharSelected}/>
                         </Col>
                         <Col md='6'>
-                            <CharDetails />
+                            <CharDetails selectedChar={this.state.selectedChar}/>
                         </Col>
                     </Row>
                 </Container>
