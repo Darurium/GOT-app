@@ -4,13 +4,20 @@ import Header from '../header';
 import RandomChar from '../randomChar';
 import ItemList from '../itemList';
 import CharDetails from '../charDetails';
+import Error from '../error';
 
 
 export default class App extends Component {
 
     state = {
         charView: true,
-        selectedChar: 130
+        selectedChar: 130,
+        error: false
+    }
+
+    componentDidCatch() {
+        console.log("Error")
+        this.setState({error: true})
     }
 
     onToggleChar = () => {
@@ -30,6 +37,10 @@ export default class App extends Component {
         const {charView} = this.state;
 
         const randomCharToggle = charView ? <RandomChar/> : null;
+
+        if (this.state.error) {
+            return <Error/>
+        }
 
         return (
             <> 
