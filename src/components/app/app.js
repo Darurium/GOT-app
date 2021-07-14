@@ -2,11 +2,10 @@ import React, {Component} from 'react';
 import {Col, Row, Container} from 'reactstrap';
 import Header from '../header';
 import RandomChar from '../randomChar';
-import {CharacterPage, HousesPage} from '../pages';
-import ItemList from '../itemList';
-import CharDetails from '../itemDetails';
+import {BooksPage, CharacterPage, HousesPage} from '../pages';
 import Error from '../error';
 import gotService from "../../services/gotService";
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 
 export default class App extends Component {
@@ -41,45 +40,31 @@ export default class App extends Component {
         }
 
         return (
-            <> 
-                <Container>
-                    <Header />
-                </Container>
-                <Container>
-                    <Row>
-                        <Col lg={{size: 5, offset: 0}}>
-                            {randomCharToggle}
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <button onClick={this.onToggleChar}>RandomChar</button>
-                        </Col>
-                    </Row>
+            <Router>
+                <div className="app"> 
+                    <Container>
+                        <Header />
+                    </Container>
+                    <Container>
+                        <Row>
+                            <Col lg={{size: 5, offset: 0}}>
+                                {randomCharToggle}
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <button onClick={this.onToggleChar}>RandomChar</button>
+                            </Col>
+                        </Row>
+                        
+                        <Route path="/characters" component={CharacterPage}/>
+                        <Route path="/houses" component={HousesPage}/>
+                        <Route path="/books" component={BooksPage}/>
 
-                    <CharacterPage/>
-                    <HousesPage/>
-
-                   
-
-
-
-
-                    <Row>
-                        <Col md='6'>
-                            <ItemList 
-                                onItemSelected={this.onItemSelected}
-                                getData={this.gotService.getAllBooks}
-                                renderItem={(item) => (`${item.name} / ${item.numberOfPages}`)}
-                            />
-                        </Col>
-                        <Col md='6'>
-                            <CharDetails selectedChar={this.state.selectedChar}/>
-                        </Col>
-                    </Row>
-                    
-                </Container>
-            </>
+                        
+                    </Container>
+                </div>
+            </Router>
         );
     }
 };
