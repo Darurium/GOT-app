@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import gotService from "../../services/gotService";
-import './charDetails.css';
+import './itemDetails.css';
 
 
-const Field = ({char, field, label}) => {
+const Field = ({item, field, label}) => {
     return (
         <li className="list-group-item d-flex justify-content-between">
             <span className="term">{label}</span>
-            <span>{char[field]}</span>
+            <span>{item[field]}</span>
         </li>
     )
 }
@@ -17,44 +17,45 @@ export {
 }
 
 
-export default class CharDetails extends Component {
+export default class ItemDetails extends Component {
 
     gotService = new gotService();
 
     state = {
-        char: null
+        item: null
     }
 
     componentDidMount() {
-        this.updateChar();
+        this.updateItem();
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.selectedChar !== prevProps.selectedChar) {
-            this.updateChar()
+        if (this.props.selectedItem !== prevProps.selectedItem) {
+            this.updateItem()
         }
+        console.log(this.props.selectedItem);
     }
 
-    updateChar() {
-        const {selectedChar} = this.props;
-        if (!selectedChar) {
+    updateItem() {
+        const {selectedItem, getData} = this.props;
+        if (!selectedItem) {
             return
         }
 
-        this.gotService.getCharacter(selectedChar)
-            .then(char => {
-                this.setState({char})
+        getData(selectedItem)
+            .then(item => {
+                this.setState({item})
             })
     }
 
     render() {
 
-        if (!this.state.char) {
+        if (!this.state.item) {
             return <span>Выберите персонажа</span>
         }
 
-        const {char} = this.state;
-        const {name} = char;
+        const {item} = this.state;
+        const {name} = item;
 
         return (
             <div className="char-details rounded">
@@ -62,7 +63,7 @@ export default class CharDetails extends Component {
                 <ul className="list-group list-group-flush">
                     {
                         React.Children.map(this.props.children, (child) => {
-                            return React.cloneElement(child, {char})
+                            return React.cloneElement(child, {item})
                         })
                     }
                 </ul>

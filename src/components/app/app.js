@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import {Col, Row, Container} from 'reactstrap';
 import Header from '../header';
 import RandomChar from '../randomChar';
-import CharacterPage from '../characterPage';
+import {CharacterPage, HousesPage} from '../pages';
 import ItemList from '../itemList';
-import CharDetails from '../charDetails';
+import CharDetails from '../itemDetails';
 import Error from '../error';
 import gotService from "../../services/gotService";
 
@@ -58,19 +58,13 @@ export default class App extends Component {
                     </Row>
 
                     <CharacterPage/>
+                    <HousesPage/>
 
-                    <Row>
-                        <Col md='6'>
-                            <ItemList 
-                                onItemSelected={this.onItemSelected}
-                                getData={this.gotService.getAllHouses}
-                                renderItem={(item) => (`${item.name} / ${item.region}`)}
-                            />
-                        </Col>
-                        <Col md='6'>
-                            <CharDetails selectedChar={this.state.selectedChar}/>
-                        </Col>
-                    </Row>
+                   
+
+
+
+
                     <Row>
                         <Col md='6'>
                             <ItemList 

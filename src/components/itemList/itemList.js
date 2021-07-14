@@ -21,10 +21,12 @@ export default class ItemList extends Component {
                     itemList
                 })
             })
+
+        
     }
 
     renderItems(arr) {
-        return arr.map((item) => {
+        return arr.map((item, i) => {
             const {id} = item;
             const label = this.props.renderItem(item)
             return (
