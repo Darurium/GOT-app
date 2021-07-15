@@ -59,7 +59,8 @@ export default class App extends Component {
                         
                         <Route path="/characters" component={CharacterPage}/>
                         <Route path="/houses" component={HousesPage}/>
-                        <Route path="/books" component={BooksPage}/>
+                        <Route path="/books" exact component={BooksPage}/>
+                        <Route path="/books/:id" component={BooksPage}/>
 
                         
                     </Container>
